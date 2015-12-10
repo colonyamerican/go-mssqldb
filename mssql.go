@@ -89,7 +89,7 @@ func (c *MssqlConn) Begin() (driver.Tx, error) {
 		{hdrtype: dataStmHdrTransDescr,
 			data: transDescrHdr{0, 1}.pack()},
 	}
-	if err := sendBeginXact(c.sess.buf, headers, 0, ""); err != nil {
+	if err := sendBeginXact(c.sess.buf, headers, 5, ""); err != nil {
 		return nil, CheckBadConn(err)
 	}
 	tokchan := make(chan tokenStruct, 5)
